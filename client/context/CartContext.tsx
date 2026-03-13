@@ -35,7 +35,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setIsLoading(true);
         const serverCart = dummyCart;
         const mappedItems: CartItem[] = serverCart.items.map((item: any) => ({
-            id: item.product._id,
+            id: item._id,
             productId: item.product._id,
             product: item.product,
             quantity: item.quantity,
