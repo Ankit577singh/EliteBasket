@@ -36,7 +36,7 @@ export default function TabLayout() {
                 color={color}
               />
               {cartItems?.length > 0 && (
-                <View className='absolute -top--3 -right-2 bg-accent w-4 h-4 rounded-full items-center justify-center'>
+                <View className='absolute -top-1 -right-2 bg-accent w-4 h-4 rounded-full items-center justify-center'>
                   <Text className='text-white text-xs font-bold'>
                     {cartItems.length > 9 ? '9+' : cartItems.length}
                   </Text>

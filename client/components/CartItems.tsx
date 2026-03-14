@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { COLORS } from '@/constants'
 
 export default function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
-  const imageUrl = item.product.images[0]
+  const imageUrl = item.product.images?.[0] ?? '';
 
   return (
     <View className='flex-row mb-4 bg-white p-3 rounded-xl shadow-sm'>

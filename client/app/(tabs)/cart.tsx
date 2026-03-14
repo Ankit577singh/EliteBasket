@@ -2,7 +2,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-
+ 
 import { useRouter } from 'expo-router'
 import Header from '@/components/header'
 import { useCart } from '@/context/CartContext'
@@ -27,7 +27,7 @@ export default function Cart() {
                     showsVerticalScrollIndicator={false}
                 >
                   {cartItems.map((item , index)=>(
-                    <CartItem key={index}
+                    <CartItem key={item.id}
                     item={item}
                     onRemove={()=> removeFromCart(item.id , item.size)}
                     onUpdateQuantity={(q)=>updateQuantity(item.id , q , item.size)}
