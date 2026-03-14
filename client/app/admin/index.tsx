@@ -44,9 +44,9 @@ export default function AdminDashboard() {
             className="flex-1 bg-surface p-4"
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
-            <View className="mb-8">
+            <View className="mb-8 ">
                 <Text className="text-primary font-bold text-2xl mb-4 tracking-tight">Overview</Text>
-                <View className="flex-row flex-wrap justify-between">
+                <View className="flex-row flex-wrap justify-between ">
                     <StatCard label="Total Revenue" value={`$${stats.totalRevenue.toFixed(2)}`} />
                     <StatCard label="Total Orders" value={stats.totalOrders.toString()} />
                     <StatCard label="Products" value={stats.totalProducts.toString()} />
@@ -62,7 +62,7 @@ export default function AdminDashboard() {
                     </View>
                 ) : (
                     stats.recentOrders.map((order: any) => (
-                        <View key={order._id} className="bg-white p-5 rounded-2xl border border-gray-100 mb-3">
+                        <View key={order._id} className="bg-white p-6 rounded-2xl border border-gray-100 mb-3">
                             <View className="flex-row justify-between items-center mb-3">
                                 <View>
                                     <Text className="font-bold text-primary text-base">Total Products : {order.items.reduce((acc: number, item: any) => acc + item.quantity, 0)}</Text>
@@ -100,7 +100,7 @@ export default function AdminDashboard() {
 }
 
 const StatCard = ({ label, value }: { label: string, value: string }) => (
-    <View className="bg-white p-5 rounded-2xl border border-gray-100 w-[48%] mb-4 justify-center">
+    <View className="bg-white p-6 rounded-2xl border border-gray-100 w-[48%] mb-4 justify-center">
         <Text className="text-xl font-bold text-primary mb-1">{value}</Text>
         <Text className="text-secondary text-xs font-medium uppercase tracking-wide">{label}</Text>
     </View>
