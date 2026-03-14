@@ -46,6 +46,7 @@ const fetchProduct = () => {
   const isLiked = product ? isInWishlist(product._id) : false;
 
   const handleAddToCart = () => {
+  if (!product) return; 
   const requiresSize = (product?.sizes?.length ?? 0) > 0;
      if (requiresSize && !selectedSize)  {
       Toast.show({

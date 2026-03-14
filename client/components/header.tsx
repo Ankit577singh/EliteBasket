@@ -4,11 +4,13 @@ import { HeaderProps } from '@/constants/types'
 import { Ionicons } from '@expo/vector-icons'
 import { COLORS } from '@/constants'
 import { useRouter } from 'expo-router'
+import { useCart } from '@/context/CartContext'
 
 export default function Header({title , showBack , showSearch , showCart  , showMenu , showLogo} : HeaderProps) {
 
   const router = useRouter();
-  const {itemCount} = {itemCount : 6};
+  const {itemCount} = useCart();
+  
   return (
     <View className='flex-row items-center justify-between px-4 py-3 bg-white'>
       {/* left side */}
@@ -27,7 +29,7 @@ export default function Header({title , showBack , showSearch , showCart  , show
 
           {showLogo ? (
             <View className='flex-1'> 
-              <Image source={require('@/assets/logo.png')} style={{width:'100%',height:24}}  resizeMode='contain'/>
+              <Image source={require('@/assets/logo.png')} style={{width:'100%',height:32}}  resizeMode='contain'/>
             </View>
           ): title && (
             <Text className='text-xl font-bold text-primary text-center flex-1 mr-8'>
