@@ -123,7 +123,7 @@ export default function Page() {
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}
             >
-                        <SafeAreaView className="flex-1 bg-white justify-center" style={{ padding: 28 }}>
+        <View className="flex-1 bg-white justify-center" style={{ padding: 28 }}>
             <TouchableOpacity onPress={() => router.push("/")} className="absolute top-12 z-10">
                 <Ionicons name="arrow-back" size={24} color={COLORS.primary} />
             </TouchableOpacity>
@@ -178,7 +178,7 @@ export default function Page() {
                     <Text className="text-primary font-bold">Sign up</Text>
                 </Link>
             </View>
-        </SafeAreaView>
+        </View>
             </ScrollView>
         </KeyboardAvoidingView>
     </SafeAreaView>
