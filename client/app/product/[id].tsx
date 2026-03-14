@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, Image, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, ScrollView, Image, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -9,6 +9,7 @@ import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 // import { Product } from '@/constants/types';
 import { Product } from '@/constants/types';
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const { width } = Dimensions.get('window');
 
@@ -23,26 +24,30 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-//   const fetchProduct = async () => {
-//     // Replace with your actual product fetching logic
-//     setProduct(dummyProducts.find((Product) => product?._id === id) as any);
-//     setLoading(false);
-//   };
 
-const fetchProduct = async () => {
+const fetchProduct = () => {
+  setLoading(true);
+  if (!id) {
+    setProduct(null);
+    setLoading(false);
+    return;
+  }
   const foundProduct = dummyProducts.find((product) => product._id === id);
-  setProduct(foundProduct || null);
+  setProduct(foundProduct ?? null);
+  setSelectedSize(null);
+  setActiveImageIndex(0);
   setLoading(false);
 };
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [id]);
 
   const isLiked = product ? isInWishlist(product._id) : false;
 
   const handleAddToCart = () => {
-    if (!selectedSize) {
+  const requiresSize = (product?.sizes?.length ?? 0) > 0;
+     if (requiresSize && !selectedSize)  {
       Toast.show({
         type: 'info',
         text1: 'No Size Selected',
@@ -50,7 +55,7 @@ const fetchProduct = async () => {
       });
       return;
     }
-    addToCart(product , selectedSize || '');
+    addToCart(product , selectedSize ?? '');
   };
 
   if (loading) {
@@ -101,10 +106,12 @@ const fetchProduct = async () => {
             showsHorizontalScrollIndicator={false}
             scrollEventThrottle={16}
             onScroll={(e) => {
-              const slide = Math.ceil(
-                e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
-              );
-              setActiveImageIndex(slide);
+
+               const raw = e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width;
+               const slide = Math.round(raw);
+               const maxIndex = Math.max(0, product.images.length - 1);
+               setActiveImageIndex(Math.min(Math.max(slide, 0), maxIndex));
+             
             }}
           >
             {product.images?.map((img, index) => (

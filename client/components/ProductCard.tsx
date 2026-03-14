@@ -21,7 +21,14 @@ export default function ProductCard({product}: ProductCardProps) {
                 <Image source={{uri : product.images[0]}} className='w-full h-full' resizeMode='cover'/>
 
                 {/* faviourte icon  */}
-               <TouchableOpacity className='z-10 p-1 items-center justify-center absolute top-2 right-2 bg-white rounded-full shadow-sm' onPress={(e)=>{e.stopPropagation();toggleWishlist(product)}}>
+                <TouchableOpacity
+                 accessibilityRole='button'
+                 accessibilityLabel={isLike ? 'Remove from wishlist' : 'Add to wishlist'}
+                 accessibilityState={{ selected: isLike }}
+                 className='z-10 p-1 items-center justify-center absolute top-2 right-2 bg-white rounded-full shadow-sm'
+                 onPress={(e)=>{e.stopPropagation();toggleWishlist(product)}}
+               >
+
                      <Ionicons name={isLike ? 'heart' : 'heart-outline'} size={18} color={isLike ? COLORS.accent : COLORS.primary}/>
                </TouchableOpacity>
 
