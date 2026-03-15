@@ -112,7 +112,7 @@ export default function SignUpScreen() {
     return (
     <SafeAreaView className="flex-1 bg-white" >
         <KeyboardAvoidingView 
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            behavior={Platform.OS === "ios" ? "padding" : "padding"}
             className="flex-1"
         >
             <ScrollView 
@@ -120,7 +120,7 @@ export default function SignUpScreen() {
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}
             >
-                        <SafeAreaView className="flex-1 bg-white justify-center" style={{ padding: 28 }}>
+        <View className="flex-1 bg-white justify-center" style={{ padding: 28 }}>
             <TouchableOpacity onPress={() => router.push("/")} className="absolute top-12 z-10">
                 <Ionicons name="arrow-back" size={24} color={COLORS.primary} />
             </TouchableOpacity>
@@ -200,7 +200,7 @@ export default function SignUpScreen() {
 
             {/* Required for Clerk bot protection */}
             <View nativeID="clerk-captcha" />
-        </SafeAreaView>
+        </View>
             </ScrollView>
         </KeyboardAvoidingView>
     </SafeAreaView>
