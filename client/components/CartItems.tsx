@@ -41,9 +41,14 @@ export default function CartItem({ item, onRemove, onUpdateQuantity }: CartItemP
           {/* Quantity Controls */}
           <View className='flex-row items-center border  border-gray-200 rounded-lg'>
             <TouchableOpacity 
-              onPress={() => onUpdateQuantity && onUpdateQuantity(item.quantity - 1)}
+              onPress={() => {
+                if (item.quantity <= 1) {
+                  onRemove();
+                } else if (onUpdateQuantity) {
+                  onUpdateQuantity(item.quantity - 1);
+                }
+              }}
               className='px-3 py-1'
-              disabled={item.quantity <= 1}
             >
              <Ionicons name='remove' size={16} color={COLORS.primary}/>
             </TouchableOpacity>
