@@ -22,7 +22,7 @@ export default function Header({title , showBack , showSearch , showCart  , show
           )}
 
           {showMenu && (
-            <TouchableOpacity className='mr-3'>
+            <TouchableOpacity className='mr-3' onPress={()=>router.push('/(tabs)/profile')}>
              <Ionicons name="menu-outline" size={28} color={COLORS.primary}/ >
            </TouchableOpacity>
           )}
@@ -42,7 +42,7 @@ export default function Header({title , showBack , showSearch , showCart  , show
       {/* right side  */}
       <View className='flex-row items-center gap-4'>
         {showSearch && (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>router.push('/shop')}>
             <Ionicons name='search-outline' size={28} color={COLORS.primary}/>
           </TouchableOpacity>
         )}
