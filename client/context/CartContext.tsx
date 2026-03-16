@@ -48,89 +48,90 @@ export function CartProvider({ children }: { children: ReactNode }) {
     };
 
     const addToCart = async (product: Product, size: string) => {
-        // Implementation for adding to cart
-        // setIsLoading(true);
-        // try {
-        //     // Check if item already exists in cart with same size
-        //     const existingItemIndex = cartItems.findIndex(
-        //         item => item.productId === product._id && item.size === size
-        //     );
+        setIsLoading(true);
+        try {
+            // Check if item already exists in cart with same size
+            const existingItemIndex = cartItems.findIndex(
+                item => item.productId === product._id && item.size === size
+            );
 
-        //     if (existingItemIndex >= 0) {
-        //         // Update quantity if item exists
-        //         const updatedItems = [...cartItems];
-        //         updatedItems[existingItemIndex].quantity += 1;
-        //         setCartItems(updatedItems);
+            if (existingItemIndex >= 0) {
+                // Update quantity if item exists
+                const updatedItems = [...cartItems];
+                updatedItems[existingItemIndex].quantity += 1;
+                setCartItems(updatedItems);
                 
-        //         // Update total
-        //         const newTotal = cartTotal + product.price;
-        //         setCartTotal(newTotal);
-        //     } else {
-        //         // Add new item
-        //         const newItem: CartItem = {
-        //             id: product._id,
-        //             productId: product._id,
-        //             product: product,
-        //             quantity: 1,
-        //             size: size,
-        //             price: product.price
-        //         };
-        //         setCartItems([...cartItems, newItem]);
-        //         setCartTotal(cartTotal + product.price);
-        //     }
-        // } finally {
-        //     setIsLoading(false);
-        // }
+                // Update total
+                const newTotal = cartTotal + product.price;
+                setCartTotal(newTotal);
+            } else {
+                // Add new item
+                const newItem: CartItem = {
+                    id: product._id,
+                    productId: product._id,
+                    product: product,
+                    quantity: 1,
+                    size: size,
+                    price: product.price
+                };
+                setCartItems([...cartItems, newItem]);
+                setCartTotal(cartTotal + product.price);
+            }
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const removeFromCart = async (productId: string, size: string) => {
-        // setIsLoading(true);
-        // try {
-        //     const itemToRemove = cartItems.find(
-        //         item => item.productId === productId && item.size === size
-        //     );
+        setIsLoading(true);
+        try {
+            const itemToRemove = cartItems.find(
+                item => item.productId === productId && item.size === size
+            );
             
-        //     if (itemToRemove) {
-        //         setCartItems(cartItems.filter(
-        //             item => !(item.productId === productId && item.size === size)
-        //         ));
-        //         setCartTotal(cartTotal - (itemToRemove.price * itemToRemove.quantity));
-        //     }
-        // } finally {
-        //     setIsLoading(false);
-        // }
+            if (itemToRemove) {
+                setCartItems(cartItems.filter(
+                    item => !(item.productId === productId && item.size === size)
+                ));
+                setCartTotal(cartTotal - (itemToRemove.price * itemToRemove.quantity));
+            }
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const updateQuantity = async (productId: string, quantity: number, size: string = "M") => {
-        // setIsLoading(true);
-        // try {
-        //     const itemIndex = cartItems.findIndex(
-        //         item => item.productId === productId && item.size === size
-        //     );
+        setIsLoading(true);
+        try {
+            const itemIndex = cartItems.findIndex(
+                item => item.productId === productId && item.size === size
+            );
+            console.log(itemIndex);
+            console.log("fine");
 
-        //     if (itemIndex >= 0) {
-        //         const oldQuantity = cartItems[itemIndex].quantity;
-        //         const updatedItems = [...cartItems];
-        //         updatedItems[itemIndex].quantity = quantity;
-        //         setCartItems(updatedItems);
+            if (itemIndex >= 0) {
+                const oldQuantity = cartItems[itemIndex].quantity;
+                const updatedItems = [...cartItems];
+                updatedItems[itemIndex].quantity = quantity;
+                setCartItems(updatedItems);
 
-        //         // Update total
-        //         const pricePerItem = cartItems[itemIndex].price;
-        //         setCartTotal(cartTotal + (pricePerItem * (quantity - oldQuantity)));
-        //     }
-        // } finally {
-        //     setIsLoading(false);
-        // }
+                // Update total
+                const pricePerItem = cartItems[itemIndex].price;
+                setCartTotal(cartTotal + (pricePerItem * (quantity - oldQuantity)));
+            }
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const clearCart = async () => {
-        // setIsLoading(true);
-        // try {
-        //     setCartItems([]);
-        //     setCartTotal(0);
-        // } finally {
-        //     setIsLoading(false);
-        // }
+        setIsLoading(true);
+        try {
+            setCartItems([]);
+            setCartTotal(0);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);

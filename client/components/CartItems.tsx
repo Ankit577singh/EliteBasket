@@ -39,7 +39,7 @@ export default function CartItem({ item, onRemove, onUpdateQuantity }: CartItemP
           <Text className='text-primary font-bold'>${item.product.price.toFixed(2)}</Text>
           
           {/* Quantity Controls */}
-          <View className='flex-row items-center border border-gray-200 rounded-lg'>
+          <View className='flex-row items-center border  border-gray-200 rounded-lg'>
             <TouchableOpacity 
               onPress={() => onUpdateQuantity && onUpdateQuantity(item.quantity - 1)}
               className='px-3 py-1'

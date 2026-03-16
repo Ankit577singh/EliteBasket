@@ -57,6 +57,7 @@ const fetchProduct = () => {
       return;
     }
     addToCart(product , selectedSize ?? '');
+    router.push("/(tabs)/cart");
   };
 
   if (loading) {
