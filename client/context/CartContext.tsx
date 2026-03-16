@@ -106,8 +106,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
             const itemIndex = cartItems.findIndex(
                 item => item.productId === productId && item.size === size
             );
-            console.log(itemIndex);
-            console.log("fine");
 
             if (itemIndex >= 0) {
                 const oldQuantity = cartItems[itemIndex].quantity;
